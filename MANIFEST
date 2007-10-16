@@ -5,8 +5,8 @@ MANIFEST
 MANIFEST.SKIP
 META.yml
 README
+XS.xs
 lib/JavaScript/Minifier/XS.pm
-lib/JavaScript/Minifier/XS.xs
 t/01-loads.t
 t/02-minify.t
 t/99-benchmark.t

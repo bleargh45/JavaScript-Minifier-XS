@@ -7,6 +7,9 @@ Module::Build->new(
     'license'           => 'perl',
     'dist_author'       => 'Graham TerMarsch (cpan@howlingfrog.com)',
     'create_makefile_pl'=> 'traditional',
+    'xs_files'          => {
+        'XS.xs' => 'lib/JavaScript/Minifier/XS.xs',
+        },
     'build_requires'    => {
         'Test::More'            => 0,
         },

@@ -1,4 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
+0.01_02     Tue Oct 16 12:22 PDT 2007
+    - relocate the XS file so that its picked up properly by EU::MM when
+      running "perl Makefile.PL" to do a build.
+
 0.01_01     Mon Oct 15 22:11 PDT 2007
     - initial public version
