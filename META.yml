@@ -3,7 +3,7 @@ name: JavaScript-Minifier-XS
 version: 0.01_01
 author:
   - Graham TerMarsch (cpan@howlingfrog.com)
-abstract: XS rewrite of JavaScript::Minifier
+abstract: XS based JavaScript minifier
 license: perl
 resources:
   license: http://dev.perl.org/licenses/

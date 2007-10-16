@@ -16,7 +16,7 @@ bootstrap JavaScript::Minifier::XS $VERSION;
 
 =head1 NAME
 
-JavaScript::Minifier::XS - XS rewrite of JavaScript::Minifier
+JavaScript::Minifier::XS - XS based JavaScript minifier
 
 =head1 SYNOPSIS
 
