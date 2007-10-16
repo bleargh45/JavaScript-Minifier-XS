@@ -197,8 +197,11 @@ void JsClearNodeContents(Node* node) {
 /* sets the contents of a node */
 void JsSetNodeContents(Node* node, const char* string, size_t len) {
     JsClearNodeContents(node);
-    node->contents = strndup(string, len);
     node->length = len;
+    /* allocate string, fill with NULLs, and copy */
+    node->contents = malloc( sizeof(char) * (len+1) );
+    memset( node->contents, 0, len );
+    strncpy( node->contents, string, len );
 }
 
 /* removes the node from the list and discards it entirely */
