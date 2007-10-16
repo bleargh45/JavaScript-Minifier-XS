@@ -9,7 +9,7 @@ use JavaScript::Minifier::XS;
 # check if JavaScript::Minifier available, so we can do comparison testing
 eval { require JavaScript::Minifier };
 if ($@) {
-    plan skip_all => 'JavaScript::Minifier not available for comparison testing';
+    plan skip_all => 'JavaScript::Minifier not available for benchmark comparison';
 }
 plan tests => 1;
 
