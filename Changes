@@ -1,5 +1,9 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
+0.01_04     Wed Oct 17 15:56 PDT 2007
+    - fix t/02-minify.t, so it doesn't try to "use_ok()" before issuing a test
+      plan
+
 0.01_03     Tue Oct 16 19:47 PDT 2007
     - don't use "strndup()"; not available on all systems
     - we require Perl 5.006; update Build.PL and XS.pm to denote this

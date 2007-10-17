@@ -2,9 +2,7 @@ use strict;
 use warnings;
 use IO::File;
 use Test::More;
-BEGIN {
-    use_ok('JavaScript::Minifier::XS', qw(minify));
-};
+use JavaScript::Minifier::XS qw(minify);
 
 ###############################################################################
 # figure out how many JS files we're going to run through for testing
