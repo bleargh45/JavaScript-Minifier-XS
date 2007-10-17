@@ -1,8 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
-0.01_03     ???
+0.01_03     Tue Oct 16 19:47 PDT 2007
     - don't use "strndup()"; not available on all systems
-    - we require Perl 5.006
+    - we require Perl 5.006; update Build.PL and XS.pm to denote this
 
 0.01_02     Tue Oct 16 12:22 PDT 2007
     - relocate the XS file so that its picked up properly by EU::MM when
