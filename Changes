@@ -1,5 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
+0.01_05     Sat Oct 20 22:48 PDT 2007
+    - don't use "strcasestr()"; not available on Solaris
+
 0.01_04     Wed Oct 17 15:56 PDT 2007
     - fix t/02-minify.t, so it doesn't try to "use_ok()" before issuing a test
       plan

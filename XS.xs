@@ -5,6 +5,7 @@
 #include <string.h>
 #include <strings.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 /* ****************************************************************************
  * CHARACTER CLASS METHODS
@@ -116,9 +117,30 @@ int nodeEquals(Node* node, const char* string) {
 
 /* checks to see if the node contains the given string, case INSENSITIVELY */
 int nodeContains(Node* node, const char* string) {
-    return (strcasestr(node->contents, string) != NULL);
-}
+    const char* haystack = node->contents;
+    size_t len = strlen(string);
+    char ul_start[2] = { tolower(*string), toupper(*string) };
 
+    /* if node is shorter we know we're not going to have a match */
+    if (len > node->length)
+        return 0;
+
+    /* find the needle in the haystack */
+    while (haystack && *haystack) {
+        /* find first char of needle */
+        haystack = strpbrk( haystack, ul_start );
+        if (haystack == NULL)
+            return 0;
+        /* check if the rest matches */
+        if (strncasecmp(haystack, string, len) == 0)
+            return 1;
+        /* nope, move onto next character in the haystack */
+        haystack ++;
+    }
+
+    /* no match */
+    return 0;
+}
 /* checks to see if the node begins with the given string, case INSENSITIVELY
  */
 int nodeBeginsWith(Node* node, const char* string) {
