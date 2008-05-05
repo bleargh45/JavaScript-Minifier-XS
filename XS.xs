@@ -425,7 +425,7 @@ Node* JsTokenizeString(const char* string) {
                     last = last->prev;
                 ch = last->contents[last->length-1];
                 /* see if we're "division" or "regexp" */
-                if (ch && ((ch == ')') || (ch == '.') || (charIsIdentifier(ch))))
+                if (ch && ((ch == ')') || (ch == '.') || (ch == ']') || (charIsIdentifier(ch))))
                     _JsExtractSigil(&doc, node);    /* division */
                 else
                     _JsExtractLiteral(&doc, node);  /* regexp */
