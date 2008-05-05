@@ -18,6 +18,8 @@ t/js/comments-ie-conditional.js
 t/js/comments-ie-conditional.min
 t/js/division.js
 t/js/division.min
+t/js/division-of-array-subscripts.js
+t/js/division-of-array-subscripts.min
 t/js/leading-whitespace.js
 t/js/leading-whitespace.min
 t/js/literals-double-quotes.js
