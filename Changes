@@ -1,8 +1,9 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
-???
+0.01        Mon May  5 15:11 PDT 2008
     - fix minification of "division of an array subscript".  Thanks to Ingy and
       Dan at Socialtext for the JS!
+    - first NON-devel release
 
 0.01_05     Sat Oct 20 22:48 PDT 2007
     - don't use "strcasestr()"; not available on Solaris
