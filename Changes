@@ -1,5 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
+0.02        Tue May  6 00:16 PDT 2008
+    - rebuild packages; EU::MM borked my META.yml
+
 0.01        Mon May  5 15:11 PDT 2008
     - fix minification of "division of an array subscript".  Thanks to Ingy and
       Dan at Socialtext for the JS!
