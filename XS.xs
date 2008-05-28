@@ -7,6 +7,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+/* uncomment to enable debugging output */
+//#define DEBUG 1
+
 /* ****************************************************************************
  * CHARACTER CLASS METHODS
  * ****************************************************************************
@@ -80,6 +83,15 @@ typedef enum {
     NODE_LITERAL,
     NODE_SIGIL
 } NodeType;
+static char* strNodeTypes[] = {
+    "empty",
+    "whitespace",
+    "block comment",
+    "line comment",
+    "identifier",
+    "literal",
+    "sigil"
+    };
 
 struct _Node;
 typedef struct _Node Node;
@@ -449,6 +461,22 @@ Node* JsTokenizeString(const char* string) {
         if (node != doc.tail)
             JsAppendNode(doc.tail, node);
         doc.tail = node;
+
+        /* some debugging info */
+#ifdef DEBUG
+        {
+            int idx;
+            printf("----------------------------------------------------------------\n");
+            printf("%s: %s\n", strNodeTypes[node->type], node->contents);
+            printf("next: '");
+            for (idx=0; idx<=10; idx++) {
+                if ((doc.offset+idx) >= doc.length) break;
+                if (!doc.buffer[doc.offset+idx])    break;
+                printf("%c", doc.buffer[doc.offset+idx]);
+            }
+            printf("'\n");
+        }
+#endif
     }
 
     /* return the node list */
