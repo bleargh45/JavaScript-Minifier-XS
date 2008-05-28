@@ -14,6 +14,8 @@ t/pod.t
 t/pod-coverage.t
 t/js/comments.js
 t/js/comments.min
+t/js/comments-before-a-regex.js
+t/js/comments-before-a-regex.min
 t/js/comments-ie-conditional.js
 t/js/comments-ie-conditional.min
 t/js/division.js

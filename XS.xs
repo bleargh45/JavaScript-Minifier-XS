@@ -432,10 +432,10 @@ Node* JsTokenizeString(const char* string) {
                  * our context...
                  */
 
-                /* find last non-whitespace node */
+                /* find last non-whitespace, non-comment node */
                 Node* last = doc.tail;
                 char ch = 0;
-                while (nodeIsWHITESPACE(last))
+                while (nodeIsWHITESPACE(last) || nodeIsCOMMENT(last))
                     last = last->prev;
                 ch = last->contents[last->length-1];
                 /* see if we're "division" or "regexp" */
