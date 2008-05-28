@@ -218,11 +218,13 @@ void JsClearNodeContents(Node* node) {
 
 /* sets the contents of a node */
 void JsSetNodeContents(Node* node, const char* string, size_t len) {
+    size_t bufSize = len + 1;
+    /* clear node, set new length */
     JsClearNodeContents(node);
     node->length = len;
     /* allocate string, fill with NULLs, and copy */
-    node->contents = malloc( sizeof(char) * (len+1) );
-    memset( node->contents, 0, len );
+    node->contents = malloc( sizeof(char) * bufSize );
+    memset( node->contents, 0, bufSize );
     strncpy( node->contents, string, len );
 }
 

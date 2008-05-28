@@ -1,5 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
+????
+    - properly clear end of internally allocated buffers
+
 0.02        Tue May  6 00:16 PDT 2008
     - rebuild packages; EU::MM borked my META.yml
 
