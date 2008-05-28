@@ -1,6 +1,6 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
-????
+0.03        Wed May 28, 14:46 PDT 2008
     - fix minification when a regexp follows a comment that ends with something
       that looks like code; was treating it as division instead of as a literal
     - properly clear end of internally allocated buffers
