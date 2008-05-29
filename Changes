@@ -1,5 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
+0.04        Wed May 28, 21:58 PDT 2008
+    - rebuild packages; wrong version number in META.yml
+
 0.03        Wed May 28, 14:46 PDT 2008
     - fix minification when a regexp follows a comment that ends with something
       that looks like code; was treating it as division instead of as a literal
