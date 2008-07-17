@@ -1,5 +1,9 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
+0.05        Wed Jul 16, 23:35 PDT 2008
+    - don't segfault w/older Perls if we minify right down to nothing.
+      (similar behaviour as described for CSS::Minifier::XS in RT #36557)
+
 0.04        Wed May 28, 21:58 PDT 2008
     - rebuild packages; wrong version number in META.yml
 
