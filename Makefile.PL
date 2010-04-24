@@ -3,12 +3,12 @@ require 5.006;
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-          'INSTALLDIRS' => 'site',
           'NAME' => 'JavaScript::Minifier::XS',
-          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/JavaScript/Minifier/XS.pm',
           'PREREQ_PM' => {
                            'Test::More' => 0
-                         }
+                         },
+          'INSTALLDIRS' => 'site',
+          'EXE_FILES' => []
         )
 ;
