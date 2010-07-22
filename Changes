@@ -1,6 +1,6 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
-0.08        ???
+0.08        Wed Jul 21 21:23 PDT 2010
     - use Newxz/Safefree for memory management, instead of malloc/free.  Thanks
       to Kenichi Ishigaki for his patch to CSS-Minifier-XS that prompted this.
 
