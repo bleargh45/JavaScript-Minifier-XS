@@ -1,6 +1,6 @@
 ---
 name: JavaScript-Minifier-XS
-version: 0.07
+version: 0.08
 author:
   - Graham TerMarsch (cpan@howlingfrog.com)
 abstract: XS based JavaScript minifier
@@ -16,7 +16,7 @@ configure_requires:
 provides:
   JavaScript::Minifier::XS:
     file: lib/JavaScript/Minifier/XS.pm
-    version: 0.07
+    version: 0.08
 generated_by: Module::Build version 0.35
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
