@@ -196,7 +196,8 @@ int nodeEndsWith(Node* node, const char* string) {
 /* allocates a new node */
 static size_t js_id_counter=0;      // XXX
 Node* JsAllocNode() {
-    Node* node = malloc(sizeof(Node));
+    Node* node;
+    Newxz(node, 1, Node);
     node->prev = NULL;
     node->next = NULL;
     node->contents = NULL;
@@ -209,8 +210,8 @@ Node* JsAllocNode() {
 /* frees the memory used by a node */
 void JsFreeNode(Node* node) {
     if (node->contents)
-        free(node->contents);
-    free(node);
+        Safefree(node->contents);
+    Safefree(node);
 }
 void JsFreeNodeList(Node* head) {
     while (head) {
@@ -223,7 +224,7 @@ void JsFreeNodeList(Node* head) {
 /* clears the contents of a node */
 void JsClearNodeContents(Node* node) {
     if (node->contents)
-        free(node->contents);
+        Safefree(node->contents);
     node->contents = NULL;
     node->length = 0;
 }
@@ -235,8 +236,7 @@ void JsSetNodeContents(Node* node, const char* string, size_t len) {
     JsClearNodeContents(node);
     node->length = len;
     /* allocate string, fill with NULLs, and copy */
-    node->contents = malloc( sizeof(char) * bufSize );
-    memset( node->contents, 0, bufSize );
+    Newxz(node->contents, bufSize, char);
     strncpy( node->contents, string, len );
 }
 
@@ -692,7 +692,8 @@ char* JsMinify(const char* string) {
         /* allocate the result buffer to the same size as the original JS; in a
          * worst case scenario that's how much memory we'll need for it.
          */
-        ptr = results = malloc( sizeof(char) * (strlen(string)+1) );
+        Newxz(results, (strlen(string)+1), char);
+        ptr = results;
         /* copy node contents into result buffer */
         curr = head;
         while (curr) {
@@ -726,7 +727,7 @@ minify(string)
         /* hand back the minified JS (if we had any) */
         if (buffer != NULL) {
             RETVAL = newSVpv(buffer, 0);
-            free( buffer );
+            Safefree( buffer );
         }
     OUTPUT:
         RETVAL
