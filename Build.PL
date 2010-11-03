@@ -1,4 +1,3 @@
-use 5.006;
 use strict;
 use warnings;
 use Module::Build;
@@ -12,7 +11,7 @@ Module::Build->new(
         'XS.xs' => 'lib/JavaScript/Minifier/XS.xs',
         },
     'requires'          => {
-        'perl'                  => 5.006,
+        'perl'                  => '5.8.8',
         },
     'build_requires'    => {
         'Test::More'            => 0,

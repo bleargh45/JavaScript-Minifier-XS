@@ -1,6 +1,6 @@
 ---
 name: JavaScript-Minifier-XS
-version: 0.08
+version: 0.09
 author:
   - Graham TerMarsch (cpan@howlingfrog.com)
 abstract: XS based JavaScript minifier
@@ -10,13 +10,13 @@ resources:
 build_requires:
   Test::More: 0
 requires:
-  perl: 5.006
+  perl: v5.8.8
 configure_requires:
   Module::Build: 0.35
 provides:
   JavaScript::Minifier::XS:
     file: lib/JavaScript/Minifier/XS.pm
-    version: 0.08
+    version: 0.09
 generated_by: Module::Build version 0.35
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
