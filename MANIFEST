@@ -12,8 +12,6 @@ t/01-loads.t
 t/02-minify.t
 t/03-minifies-to-nothing.t
 t/99-benchmark.t
-t/pod.t
-t/pod-coverage.t
 t/js/comments.js
 t/js/comments.min
 t/js/comments-before-a-regex.js
@@ -40,3 +38,5 @@ t/js/simple.js
 t/js/simple.min
 t/js/trailing-whitespace.js
 t/js/trailing-whitespace.min
+xt/pod.t
+xt/pod-coverage.t
