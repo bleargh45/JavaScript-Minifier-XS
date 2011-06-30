@@ -34,7 +34,7 @@
    "provides" : {
       "JavaScript::Minifier::XS" : {
          "file" : "lib/JavaScript/Minifier/XS.pm",
-         "version" : "0.09"
+         "version" : "0.10"
       }
    },
    "release_status" : "stable",
@@ -43,5 +43,5 @@
          "http://dev.perl.org/licenses/"
       ]
    },
-   "version" : "0.09"
+   "version" : "0.10"
 }
