@@ -197,7 +197,7 @@ int nodeEndsWith(Node* node, const char* string) {
 static size_t js_id_counter=0;      // XXX
 Node* JsAllocNode() {
     Node* node;
-    Newxz(node, 1, Node);
+    Newz(0, node, 1, Node);
     node->prev = NULL;
     node->next = NULL;
     node->contents = NULL;
@@ -236,7 +236,7 @@ void JsSetNodeContents(Node* node, const char* string, size_t len) {
     JsClearNodeContents(node);
     node->length = len;
     /* allocate string, fill with NULLs, and copy */
-    Newxz(node->contents, bufSize, char);
+    Newz(0, node->contents, bufSize, char);
     strncpy( node->contents, string, len );
 }
 
@@ -692,7 +692,7 @@ char* JsMinify(const char* string) {
         /* allocate the result buffer to the same size as the original JS; in a
          * worst case scenario that's how much memory we'll need for it.
          */
-        Newxz(results, (strlen(string)+1), char);
+        Newz(0, results, (strlen(string)+1), char);
         ptr = results;
         /* copy node contents into result buffer */
         curr = head;
