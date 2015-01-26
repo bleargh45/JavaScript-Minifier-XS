@@ -103,7 +103,6 @@ struct _Node {
     char*       contents;
     size_t      length;
     NodeType    type;
-    size_t      id;
 };
 
 typedef struct {
@@ -194,7 +193,6 @@ int nodeEndsWith(Node* node, const char* string) {
  * ****************************************************************************
  */
 /* allocates a new node */
-static size_t js_id_counter=0;      // XXX
 Node* JsAllocNode() {
     Node* node;
     Newz(0, node, 1, Node);
@@ -203,7 +201,6 @@ Node* JsAllocNode() {
     node->contents = NULL;
     node->length = 0;
     node->type = NODE_EMPTY;
-    node->id = js_id_counter++;     // XXX
     return node;
 }
 
