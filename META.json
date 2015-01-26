@@ -4,7 +4,7 @@
       "Graham TerMarsch (cpan@howlingfrog.com)"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.110930",
+   "generated_by" : "Module::Build version 0.4206",
    "license" : [
       "perl_5"
    ],
@@ -16,13 +16,13 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::CBuilder" : 0,
-            "Test::More" : 0
+            "ExtUtils::CBuilder" : "0",
+            "Test::More" : "0"
          }
       },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "Module::Build" : "0.42"
          }
       },
       "runtime" : {
