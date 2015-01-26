@@ -27,7 +27,7 @@
       },
       "runtime" : {
          "requires" : {
-            "perl" : "v5.8.8"
+            "perl" : "v5.6.0"
          }
       }
    },

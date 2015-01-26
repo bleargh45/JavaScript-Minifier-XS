@@ -11,7 +11,7 @@ Module::Build->new(
         'XS.xs' => 'lib/JavaScript/Minifier/XS.xs',
         },
     'requires'          => {
-        'perl'                  => '5.8.8',
+        'perl'                  => '5.6.0',
         },
     'build_requires'    => {
         'Test::More'            => 0,

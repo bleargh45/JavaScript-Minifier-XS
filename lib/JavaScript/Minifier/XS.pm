@@ -1,6 +1,6 @@
 package JavaScript::Minifier::XS;
 
-use 5.8.8;
+use 5.6.0;
 use strict;
 use warnings;
 
