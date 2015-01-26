@@ -8,7 +8,7 @@
 #include <ctype.h>
 
 /* uncomment to enable debugging output */
-//#define DEBUG 1
+/* #define DEBUG 1 */
 
 /* ****************************************************************************
  * CHARACTER CLASS METHODS
