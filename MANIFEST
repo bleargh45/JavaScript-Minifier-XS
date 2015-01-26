@@ -38,5 +38,6 @@ t/js/simple.js
 t/js/simple.min
 t/js/trailing-whitespace.js
 t/js/trailing-whitespace.min
+xt/leaks.t
 xt/pod.t
 xt/pod-coverage.t
