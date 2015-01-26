@@ -15,9 +15,9 @@ foreach my $file (@files) {
     (my $min_file = $file) =~ s/\.js$/\.min/;
     my $str = slurp( $file );
     my $min = slurp( $min_file );
-    my $res = minify( $str );
+    my $res = eval { minify( $str ) };
 
-    is( $res, $min, $file );
+    is( $res, $min, $file ) or diag ($@);
 }
 
 
