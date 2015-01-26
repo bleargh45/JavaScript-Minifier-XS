@@ -428,13 +428,15 @@ Node* JsTokenizeString(const char* string) {
                 /* could be "division" or "regexp", but need to know more about
                  * our context...
                  */
-
-                /* find last non-whitespace, non-comment node */
                 Node* last = doc.tail;
                 char ch = 0;
+
+                /* find last non-whitespace, non-comment node */
                 while (nodeIsWHITESPACE(last) || nodeIsCOMMENT(last))
                     last = last->prev;
+
                 ch = last->contents[last->length-1];
+
                 /* see if we're "division" or "regexp" */
                 if (ch && ((ch == ')') || (ch == '.') || (ch == ']') || (charIsIdentifier(ch))))
                     _JsExtractSigil(&doc, node);    /* division */
