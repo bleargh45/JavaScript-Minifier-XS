@@ -39,5 +39,6 @@ t/js/trailing-whitespace.js
 t/js/trailing-whitespace.min
 xt/benchmark.t
 xt/leaks.t
+xt/minimum-version.t
 xt/pod.t
 xt/pod-coverage.t
