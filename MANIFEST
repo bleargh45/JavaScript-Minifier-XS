@@ -33,6 +33,8 @@ t/js/postfix-sigil.js
 t/js/postfix-sigil.min
 t/js/prefix-sigil.js
 t/js/prefix-sigil.min
+t/js/regexp-not-line-comment.js
+t/js/regexp-not-line-comment.min
 t/js/return-regex.js
 t/js/return-regex.min
 t/js/simple.js
