@@ -4,7 +4,7 @@ use Test::More tests => 3;
 use JavaScript::Minifier::XS qw(minify);
 
 my $results;
-#
+
 ###############################################################################
 # Minifying down to "nothing" shouldn't segfault.
 #
