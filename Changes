@@ -5,6 +5,9 @@ Revision history for Perl extension JavaScript::Minifier::XS.
       Thanks to Michael Robinton and Ruslan Zakirov.
     - Lowered minimum Perl version to v5.6.0, as detected by
       Perl::MinimumVersion.
+    - RT #51008; allow for minification of JS code that returns regexps from
+      functions.
+      Thanks to James Barton, Robert Krimen, and Randy Stauner.
 
 0.09        Tue Nov  2 22:12 PDT 2010
     - Bump required Perl version to 5.8.8; oldest release w/Newxz() available.

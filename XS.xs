@@ -438,10 +438,18 @@ Node* JsTokenizeString(const char* string) {
                 ch = last->contents[last->length-1];
 
                 /* see if we're "division" or "regexp" */
-                if (ch && ((ch == ')') || (ch == '.') || (ch == ']') || (charIsIdentifier(ch))))
-                    _JsExtractSigil(&doc, node);    /* division */
-                else
-                    _JsExtractLiteral(&doc, node);  /* regexp */
+                if (nodeIsIDENTIFIER(last) && nodeEquals(last, "return")) {
+                    /* returning a regexp from a function */
+                    _JsExtractLiteral(&doc, node);
+                }
+                else if (ch && ((ch == ')') || (ch == '.') || (ch == ']') || (charIsIdentifier(ch)))) {
+                    /* looks like an identifier; guess its division */
+                    _JsExtractSigil(&doc, node);
+                }
+                else {
+                    /* presume its a regexp */
+                    _JsExtractLiteral(&doc, node);
+                }
             }
         }
         else if ((doc.buffer[doc.offset] == '"') || (doc.buffer[doc.offset] == '\''))
