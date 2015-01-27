@@ -15,6 +15,7 @@ before_install:
   - cpanm Test::MinimumVersion
   - cpanm Test::LeakTrace
   - cpanm JavaScript::Minifier File::Slurp
+  - cpanm IPC::Run
 
 # When building, include "xt/" directory too.
 script: "perl Build.PL && ./Build && prove -b -r --timer t/ xt/"
