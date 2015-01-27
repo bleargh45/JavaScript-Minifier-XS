@@ -22,30 +22,28 @@ my @files = <t/js/*.js>;
 compare_benchmark: {
     my $count;
     my $time = 10;
+    diag "Benchmarking...";
 
     # build a longer JavaScript document to process; 64KBytes should be
     # suitable
+    my $content = join '', map { slurp($_) } @files;
     my $str = '';
     while (1) {
-        foreach my $file (@files) {
-            $str .= slurp( $file );
-        }
         last if (length($str) > (64*1024));
+        $str .= $content;
     }
 
     # benchmark the original "pure perl" version
     $count = countit( $time, sub { JavaScript::Minifier::minify(input=>$str) } );
     my $rate_pp = ($count->iters() / $time) * length($str);
+    diag "\tperl\t=> $rate_pp bytes/sec";
 
     # benchmark the "XS" version
     $count = countit( $time, sub { JavaScript::Minifier::XS::minify($str) } );
     my $rate_xs = ($count->iters() / $time) * length($str);
+    diag "\txs\t=> $rate_xs bytes/sec";
 
-    ok( 1, "benchmarking" );
-    diag( "" );
-    diag( "Benchmark results:" );
-    diag( "\tperl\t=> $rate_pp bytes/sec" );
-    diag( "\txs\t=> $rate_xs bytes/sec" );
+    pass 'benchmarking';
 }
 
 
