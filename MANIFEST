@@ -44,3 +44,4 @@ xt/leaks.t
 xt/minimum-version.t
 xt/pod.t
 xt/pod-coverage.t
+xt/test-compile.t

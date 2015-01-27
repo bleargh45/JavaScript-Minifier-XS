@@ -8,6 +8,9 @@ Revision history for Perl extension JavaScript::Minifier::XS.
     - RT #51008; allow for minification of JS code that returns regexps from
       functions.
       Thanks to James Barton, Robert Krimen, and Randy Stauner.
+    - Added "xt/test-compile.t" to test minification against a wider range of
+      JS.  While not a 100% guarantee that the JS still works, it does provide
+      a wider range of JS to test against.
 
 0.09        Tue Nov  2 22:12 PDT 2010
     - Bump required Perl version to 5.8.8; oldest release w/Newxz() available.
