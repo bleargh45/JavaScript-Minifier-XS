@@ -15,5 +15,6 @@ Module::Build->new(
         },
     'build_requires'    => {
         'Test::More'            => 0,
+        'ExtUtils::CBuilder'    => 0,
         },
     )->create_build_script();
