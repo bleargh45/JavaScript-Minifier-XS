@@ -11,11 +11,11 @@ perl:
 
 # Include dependencies for all "xt/" tests.
 before_install:
-  - cpanm Test::Pod Test::Pod::Coverage
-  - cpanm Test::MinimumVersion
-  - cpanm Test::LeakTrace
-  - cpanm JavaScript::Minifier File::Slurp
-  - cpanm IPC::Run
+  - cpanm -n Test::Pod Test::Pod::Coverage
+  - cpanm -n Test::MinimumVersion
+  - cpanm -n Test::LeakTrace
+  - cpanm -n JavaScript::Minifier File::Slurp
+  - cpanm -n IPC::Run
 
 # When building, include "xt/" directory too.
 script: "perl Build.PL && ./Build && prove -b -r --timer t/ xt/"
