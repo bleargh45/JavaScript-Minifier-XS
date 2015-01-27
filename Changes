@@ -1,6 +1,6 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
-0.10        ??
+0.10        Mon Jan 26 22:46 PST 2015
     - RT #64948; allow builds on older versions of Perl.
       Thanks to Michael Robinton and Ruslan Zakirov.
     - Lowered minimum Perl version to v5.6.0, as detected by
