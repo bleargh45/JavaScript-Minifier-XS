@@ -15,7 +15,9 @@ plan tests => 1;
 
 ###############################################################################
 # get the list of JS files we're going to run through testing
-my @files = <t/js/*.js>;
+# ... but remove "return-regex.js" as JavaScript::Minifier chokes on that one
+#     (we're ok in JS:Min:XS, but JS:Min chokes).
+my @files = grep { !/return-regex/ } <t/js/*.js>;
 
 ###############################################################################
 # time test the PurePerl version against the XS version.
