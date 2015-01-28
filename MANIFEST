@@ -11,6 +11,7 @@ lib/JavaScript/Minifier/XS.pm
 t/01-loads.t
 t/02-minify.t
 t/03-minifies-to-nothing.t
+t/04-not-javascript.t
 t/js/comments.js
 t/js/comments.min
 t/js/comments-before-a-regex.js

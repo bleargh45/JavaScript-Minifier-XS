@@ -596,7 +596,7 @@ int JsCanPrune(Node* node) {
             /* remove whitespace (but NOT endspace) after identifiers, provided
              * that next thing is -NOT- another identifier
              */
-            if (nodeIsWHITESPACE(next) && !nodeIsENDSPACE(next) && next->next && !nodeIsIDENTIFIER(next->next))
+            if (next && nodeIsWHITESPACE(next) && !nodeIsENDSPACE(next) && next->next && !nodeIsIDENTIFIER(next->next))
                 return PRUNE_NEXT;
             /* keep all identifiers */
             return PRUNE_NO;
