@@ -4,13 +4,13 @@
       "Graham TerMarsch (cpan@howlingfrog.com)"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4206",
+   "generated_by" : "Module::Build version 0.4231",
    "license" : [
       "perl_5"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
-      "version" : "2"
+      "version" : 2
    },
    "name" : "JavaScript-Minifier-XS",
    "prereqs" : {
@@ -39,9 +39,16 @@
    },
    "release_status" : "stable",
    "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/bleargh45/JavaScript-Minifier-XS/issues"
+      },
       "license" : [
          "http://dev.perl.org/licenses/"
-      ]
+      ],
+      "repository" : {
+         "url" : "https://github.com/bleargh45/JavaScript-Minifier-XS"
+      }
    },
-   "version" : "0.11"
+   "version" : "0.11",
+   "x_serialization_backend" : "JSON::PP version 4.05"
 }

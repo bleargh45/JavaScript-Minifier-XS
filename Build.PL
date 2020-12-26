@@ -17,4 +17,10 @@ Module::Build->new(
         'Test::More'         => 0,
         'ExtUtils::CBuilder' => 0,
     },
+    'meta_merge' => {
+        'resources' => {
+            'repository' => 'https://github.com/bleargh45/JavaScript-Minifier-XS',
+            'bugtracker' => 'https://github.com/bleargh45/JavaScript-Minifier-XS/issues'
+        }
+    },
 )->create_build_script();
