@@ -1,6 +1,7 @@
 Build
 _build
 .git/
+.github/
 .gitignore
 \..*\.swp
 .prove
