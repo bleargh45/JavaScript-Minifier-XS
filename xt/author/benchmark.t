@@ -6,6 +6,12 @@ use Benchmark qw(countit);
 use JavaScript::Minifier::XS;
 
 ###############################################################################
+# Only run Benchmark if asked for.
+unless ($ENV{BENCHMARK}) {
+    plan skip_all => 'Skipping Benchmark; use BENCHMARK=1 to run';
+}
+
+###############################################################################
 # check if JavaScript::Minifier available, so we can do comparison testing
 eval { require JavaScript::Minifier };
 if ($@) {
