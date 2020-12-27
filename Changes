@@ -1,5 +1,10 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
+{{$NEXT}}
+    - Switch to GitHub Actions, from Travis-CI.
+    - Add META links to GitHub repository and issue tracker
+    - Switch to Dist::Zilla
+    - Bump minimum required Perl to 5.8.1
     - RT #130347; handle ES6 template literals.
       Thanks to Robert Rothenberg.
 
