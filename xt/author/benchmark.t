@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
-use IO::File;
+use File::Slurp qw(slurp);
 use Benchmark qw(countit);
 use JavaScript::Minifier::XS;
 
@@ -46,19 +46,4 @@ compare_benchmark: {
     diag "\txs\t=> $rate_xs bytes/sec";
 
     pass 'benchmarking';
-}
-
-
-
-
-###############################################################################
-# HELPER METHOD: slurp in contents of file to scalar.
-###############################################################################
-sub slurp {
-    my $filename = shift;
-    my $fin = IO::File->new( $filename, '<' ) || die "can't open '$filename'; $!";
-    my $str = join('', <$fin>);
-    $fin->close();
-    chomp( $str );
-    return $str;
 }
