@@ -1,5 +1,0 @@
-\.git
-\..*\.swp
-.prove
-blib/
-^MYMETA\.
