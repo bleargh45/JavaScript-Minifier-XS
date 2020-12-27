@@ -83,6 +83,7 @@ typedef enum {
     NODE_LITERAL,
     NODE_SIGIL
 } NodeType;
+#ifdef DEBUG
 static char* strNodeTypes[] = {
     "empty",
     "whitespace",
@@ -92,6 +93,7 @@ static char* strNodeTypes[] = {
     "literal",
     "sigil"
     };
+#endif
 
 struct _Node;
 typedef struct _Node Node;
