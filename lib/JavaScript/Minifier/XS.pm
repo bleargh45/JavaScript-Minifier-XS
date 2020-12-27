@@ -112,12 +112,6 @@ single JavaScript string, which is then returned back to the caller.
 
 Graham TerMarsch (cpan@howlingfrog.com)
 
-=head1 REPORTING BUGS
-
-Please report bugs via RT
-(L<http://rt.cpan.org/Dist/Display.html?Queue=JavaScript::Minifier::XS>),
-and be sure to include the JavaScript that you're having troubles minifying.
-
 =head1 COPYRIGHT
 
 Copyright (C) 2007-, Graham TerMarsch.  All Rights Reserved.
