@@ -5,7 +5,6 @@ _build
 .gitignore
 \..*\.swp
 .prove
-.travis.yml
 blib/
 ^MYMETA\.yml$
 ^MYMETA\.json$
