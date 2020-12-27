@@ -17,10 +17,6 @@ use File::Which qw(which);
 use JavaScript::Minifier::XS qw(minify);
 
 ###############################################################################
-# SKIP on Travis-CI for now (until I find a replacement for "jsl")
-plan skip_all => "Skipping on Travis-CI.org for now" if ($ENV{TRAVIS_BUILD_ID});
-
-###############################################################################
 # Make sure we've got "curl" and "jsl" installed.
 my $curl = which('curl');
 my $jsl  = which('jsl');
