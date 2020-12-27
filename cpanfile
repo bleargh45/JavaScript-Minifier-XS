@@ -1,4 +1,4 @@
-requires 'perl', '>= 5.006';
+requires 'perl', '>= 5.008001';
 
 test_requires 'Test::More', '>= 0.96';
 
