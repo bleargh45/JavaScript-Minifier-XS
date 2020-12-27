@@ -454,7 +454,7 @@ Node* JsTokenizeString(const char* string) {
                 }
             }
         }
-        else if ((doc.buffer[doc.offset] == '"') || (doc.buffer[doc.offset] == '\''))
+        else if ((doc.buffer[doc.offset] == '"') || (doc.buffer[doc.offset] == '\'')  || (doc.buffer[doc.offset] == '`'))
             _JsExtractLiteral(&doc, node);
         else if (charIsWhitespace(doc.buffer[doc.offset]))
             _JsExtractWhitespace(&doc, node);
