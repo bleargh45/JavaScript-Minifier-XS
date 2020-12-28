@@ -9,7 +9,7 @@ require DynaLoader;
 our @ISA = qw(Exporter DynaLoader);
 our @EXPORT_OK = qw(minify);
 
-our $VERSION = '0.12';
+our $VERSION = '0.13';
 
 bootstrap JavaScript::Minifier::XS $VERSION;
 
