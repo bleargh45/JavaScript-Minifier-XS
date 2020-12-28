@@ -1,6 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
 {{$NEXT}}
+
+0.12      2020-12-28 08:31:31-08:00 America/Vancouver
     - Switch to GitHub Actions, from Travis-CI.
     - Add META links to GitHub repository and issue tracker
     - Switch to Dist::Zilla
