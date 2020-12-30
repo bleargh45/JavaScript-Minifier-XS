@@ -2,6 +2,7 @@ Revision history for Perl extension JavaScript::Minifier::XS.
 
 {{$NEXT}}
     - POD cleanups; spelling, SYNOPSIS
+    - Switch to DZil Author Bundle
 
 0.12      2020-12-28 08:31:31-08:00 America/Vancouver
     - Switch to GitHub Actions, from Travis-CI.
