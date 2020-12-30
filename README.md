@@ -12,7 +12,7 @@ $minified = minify($js);
 # DESCRIPTION
 
 `JavaScript::Minifier::XS` is a JavaScript "minifier"; its designed to remove
-un-necessary whitespace and comments from JavaScript files, which also **not**
+unnecessary whitespace and comments from JavaScript files, which also **not**
 breaking the JavaScript.
 
 `JavaScript::Minifier::XS` is similar in function to `JavaScript::Minifier`,
@@ -27,7 +27,7 @@ but is substantially faster as its written in XS and not just pure Perl.
 
 # HOW IT WORKS
 
-`JavaScript::Minifier::XS` minifies the JavaScript by removing un-necessary
+`JavaScript::Minifier::XS` minifies the JavaScript by removing unnecessary
 whitespace from JavaScript documents.  Comments (both block and line) are also
 removed, _except_ when (a) they contain the word "copyright" in them, or (b)
 they're needed to implement "IE Conditional Compilation".
@@ -57,7 +57,7 @@ results we only want to include them at their shortest.
 
 ## Pass 3: Pruning
 
-We then go back through the token list and prune and remove un-necessary
+We then go back through the token list and prune and remove unnecessary
 tokens.
 
 - Whitespace

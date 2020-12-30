@@ -15,6 +15,8 @@ bootstrap JavaScript::Minifier::XS $VERSION;
 
 1;
 
+=for stopwords minifies minified minifier minification tokenizing EOL
+
 =head1 NAME
 
 JavaScript::Minifier::XS - XS based JavaScript minifier
@@ -27,7 +29,7 @@ JavaScript::Minifier::XS - XS based JavaScript minifier
 =head1 DESCRIPTION
 
 C<JavaScript::Minifier::XS> is a JavaScript "minifier"; its designed to remove
-un-necessary whitespace and comments from JavaScript files, which also B<not>
+unnecessary whitespace and comments from JavaScript files, which also B<not>
 breaking the JavaScript.
 
 C<JavaScript::Minifier::XS> is similar in function to C<JavaScript::Minifier>,
@@ -46,7 +48,7 @@ caller.
 
 =head1 HOW IT WORKS
 
-C<JavaScript::Minifier::XS> minifies the JavaScript by removing un-necessary
+C<JavaScript::Minifier::XS> minifies the JavaScript by removing unnecessary
 whitespace from JavaScript documents.  Comments (both block and line) are also
 removed, I<except> when (a) they contain the word "copyright" in them, or (b)
 they're needed to implement "IE Conditional Compilation".
@@ -80,7 +82,7 @@ result is the first whitespace character in the run.
 
 =head2 Pass 3: Pruning
 
-We then go back through the token list and prune and remove un-necessary
+We then go back through the token list and prune and remove unnecessary
 tokens.
 
 =over
