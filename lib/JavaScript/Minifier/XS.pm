@@ -24,7 +24,8 @@ JavaScript::Minifier::XS - XS based JavaScript minifier
 =head1 SYNOPSIS
 
   use JavaScript::Minifier::XS qw(minify);
-  $minified = minify($js);
+  my $js       = '...';
+  my $minified = minify($js);
 
 =head1 DESCRIPTION
 
