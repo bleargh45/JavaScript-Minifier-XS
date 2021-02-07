@@ -41,25 +41,34 @@ foreach my $uri (@libs) {
         return unless (defined $content);
 
         # try to compile the original JS
-        ok js_compile($content), 'original JS compiles';
+        my $res_original = js_compile($content);
 
         # minify the JS
         my $minified = minify($content);
         ok $minified, 'minified JS';
 
         # try to compile the minified JS
-        ok js_compile($minified), 'minified JS compiles';
+        my $res_minified = js_compile($minified);
+        is $res_minified, $res_original, 'same errors/warnings as the original'
+          and note $res_minified;
     };
 }
 
 sub js_compile {
     my $js = shift;
-    my ($rc, $out, $err);
+    my ($out, $err);
 
-    run [$jsl, '-stdin', '-nosummary'], \$js, \$out, \$err;
+    run [$jsl, '-stdin'], \$js, \$out, \$err;
 
-    $rc = $? >> 8;
-    return $rc <= 2;
+    my $res = (split /^/, $out)[-1];
+    $res =~ s{(\d+\s+error.*?),.*}{$1};
+
+    unless ($res =~ /\d+\s+error/) {
+      fail "Unexpected output from jsl";
+      diag $res;
+    }
+
+    return $res;
 }
 
 ###############################################################################
