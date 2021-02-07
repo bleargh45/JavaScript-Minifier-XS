@@ -3,6 +3,7 @@ use warnings;
 use Test::More;
 use File::Slurp qw(slurp);
 use Benchmark qw(countit);
+use JavaScript::Minifier;
 use JavaScript::Minifier::XS;
 
 ###############################################################################
@@ -10,14 +11,6 @@ use JavaScript::Minifier::XS;
 unless ($ENV{BENCHMARK}) {
     plan skip_all => 'Skipping Benchmark; use BENCHMARK=1 to run';
 }
-
-###############################################################################
-# check if JavaScript::Minifier available, so we can do comparison testing
-eval { require JavaScript::Minifier };
-if ($@) {
-    plan skip_all => 'JavaScript::Minifier not available for benchmark comparison';
-}
-plan tests => 1;
 
 ###############################################################################
 # get the list of JS files we're going to run through testing
@@ -53,3 +46,6 @@ compare_benchmark: {
 
     pass 'benchmarking';
 }
+
+###############################################################################
+done_testing();
