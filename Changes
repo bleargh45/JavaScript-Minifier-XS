@@ -1,6 +1,7 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
 {{$NEXT}}
+    - rewrote test suite into a single ".t" test
 
 0.13      2020-12-30 21:46:29-08:00 America/Vancouver
     - POD cleanups; spelling, SYNOPSIS
