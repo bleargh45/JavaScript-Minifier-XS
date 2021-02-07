@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use Test::More;
 use File::Slurp qw(slurp);
+use File::Which qw(which);
 use Benchmark qw(countit);
 use JavaScript::Minifier;
 use JavaScript::Minifier::XS;
@@ -13,38 +14,39 @@ unless ($ENV{BENCHMARK}) {
 }
 
 ###############################################################################
-# get the list of JS files we're going to run through testing
-# ... but remove "return-regex.js" as JavaScript::Minifier chokes on that one
-#     (we're ok in JS:Min:XS, but JS:Min chokes).
-my @files = grep { !/return-regex/ } <t/js/*.js>;
+# Find "curl"
+my $curl = which('curl');
+unless ($curl) {
+    plan skip_all => 'curl required for comparison';
+}
+
+###############################################################################
+# What JS files do we want to try compressing?
+my @libs = (
+    'http://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.js',
+    'http://code.jquery.com/jquery-3.5.1.js',
+    'http://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/cjs/react.development.js',
+);
 
 ###############################################################################
 # time test the PurePerl version against the XS version.
-compare_benchmark: {
-    my $count;
-    my $time = 10;
-    diag "Benchmarking...";
+my $time = 1;
+foreach my $uri (@libs) {
+    subtest $uri => sub {
+        my $content = qx{$curl --silent $uri};
+        ok defined $content, 'fetched JS';
+        BAIL_OUT("No JS fetched!") unless (length($content));
 
-    # build a longer JavaScript document to process; 64KBytes should be
-    # suitable
-    my $content = join '', map { slurp($_) } @files;
-    my $str = '';
-    while (1) {
-        last if (length($str) > (64*1024));
-        $str .= $content;
-    }
+        # benchmark the original "pure perl" version
+        my $count = countit($time, sub { JavaScript::Minifier::minify(input => $content) });
+        my $rate_pp = ($count->iters() / $time) * length($content);
+        pass "\tperl\t=> $rate_pp bytes/sec";
 
-    # benchmark the original "pure perl" version
-    $count = countit( $time, sub { JavaScript::Minifier::minify(input=>$str) } );
-    my $rate_pp = ($count->iters() / $time) * length($str);
-    diag "\tperl\t=> $rate_pp bytes/sec";
-
-    # benchmark the "XS" version
-    $count = countit( $time, sub { JavaScript::Minifier::XS::minify($str) } );
-    my $rate_xs = ($count->iters() / $time) * length($str);
-    diag "\txs\t=> $rate_xs bytes/sec";
-
-    pass 'benchmarking';
+        # benchmark the "XS" version
+        $count = countit( $time, sub { JavaScript::Minifier::XS::minify($content) } );
+        my $rate_xs = ($count->iters() / $time) * length($content);
+        pass "\txs\t=> $rate_xs bytes/sec";
+    };
 }
 
 ###############################################################################
