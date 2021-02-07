@@ -492,10 +492,14 @@ void JsCollapseNodes(Node* curr) {
                 JsCollapseNodeToWhitespace(curr);
                 break;
             case NODE_BLOCKCOMMENT:
+                /* IE Conditional Compilation comments do not get collapsed */
+                if (nodeIsIECONDITIONALBLOCKCOMMENT(curr)) {
+                  break;
+                }
                 /* block comments get collapsed to WS if that's a side-affect
                  * of their placement in the JS document.
                  */
-                if (!nodeIsIECONDITIONALBLOCKCOMMENT(curr)) {
+                {
                     bool convert_to_ws = 0;
                     /* find surrounding non-WS nodes */
                     Node* nonws_prev = curr->prev;
