@@ -6,6 +6,7 @@ use File::Which qw(which);
 use Benchmark qw(countit);
 use JavaScript::Minifier;
 use JavaScript::Minifier::XS;
+use Number::Format qw(format_bytes);
 
 ###############################################################################
 # Only run Benchmark if asked for.
@@ -37,17 +38,42 @@ foreach my $uri (@libs) {
         ok defined $content, 'fetched JS';
         BAIL_OUT("No JS fetched!") unless (length($content));
 
-        # benchmark the original "pure perl" version
-        my $count = countit($time, sub { JavaScript::Minifier::minify(input => $content) });
-        my $rate_pp = ($count->iters() / $time) * length($content);
-        pass "\tperl\t=> $rate_pp bytes/sec";
+        # Run the benchmarks
+        do_compress('JavaScript::Minifier', $content, sub {
+            my $js    = shift;
+            my $small = JavaScript::Minifier::minify(input => $js);
+            return $small;
+        } );
 
-        # benchmark the "XS" version
-        $count = countit( $time, sub { JavaScript::Minifier::XS::minify($content) } );
-        my $rate_xs = ($count->iters() / $time) * length($content);
-        pass "\txs\t=> $rate_xs bytes/sec";
+        do_compress('JavaScript::Minifier::XS', $content, sub {
+            my $js    = shift;
+            my $small = JavaScript::Minifier::XS::minify($js);
+            return $small;
+        } );
     };
 }
 
 ###############################################################################
 done_testing();
+
+
+sub do_compress {
+    my $name = shift;
+    my $js   = shift;
+    my $cb   = shift;
+
+    # Compress the JS
+    my $small;
+    my $count = countit($time, sub { $small = $cb->($js) } );
+
+    # Calculate length, speed, and percent savings
+    my $before   = length($js);
+    my $after    = length($small);
+    my $rate     = sprintf('%ld', ($count->iters / $time) * $before);
+    my $savings  = sprintf('%0.2f%%', (($before - $after) / $before) * 100);
+
+    my $results  = sprintf("%30s before[%7d] after[%7d] savings[%6s] rate[%8s/sec]",
+      $name, $before, $after, $savings, format_bytes($rate, unit => 'K', precision => 0),
+    );
+    pass $results;
+}
