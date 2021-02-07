@@ -402,36 +402,27 @@ void _JsExtractSigil(JsDoc* doc, Node* node) {
 }
 
 /* tokenizes the given string and returns the list of nodes */
-Node* JsTokenizeString(const char* string) {
-    JsDoc doc;
-
-    /* initialize our JS document object */
-    doc.head = NULL;
-    doc.tail = NULL;
-    doc.buffer = string;
-    doc.length = strlen(string);
-    doc.offset = 0;
-
+Node* JsTokenizeString(JsDoc* doc, const char* string) {
     /* parse the JS */
-    while ((doc.offset < doc.length) && (doc.buffer[doc.offset])) {
+    while ((doc->offset < doc->length) && (doc->buffer[doc->offset])) {
         /* allocate a new node */
         Node* node = JsAllocNode();
-        if (!doc.head)
-            doc.head = node;
-        if (!doc.tail)
-            doc.tail = node;
+        if (!doc->head)
+            doc->head = node;
+        if (!doc->tail)
+            doc->tail = node;
 
         /* parse the next node out of the JS */
-        if (doc.buffer[doc.offset] == '/') {
-            if (doc.buffer[doc.offset+1] == '*')
-                _JsExtractBlockComment(&doc, node);
-            else if (doc.buffer[doc.offset+1] == '/')
-                _JsExtractLineComment(&doc, node);
+        if (doc->buffer[doc->offset] == '/') {
+            if (doc->buffer[doc->offset+1] == '*')
+                _JsExtractBlockComment(doc, node);
+            else if (doc->buffer[doc->offset+1] == '/')
+                _JsExtractLineComment(doc, node);
             else {
                 /* could be "division" or "regexp", but need to know more about
                  * our context...
                  */
-                Node* last = doc.tail;
+                Node* last = doc->tail;
                 char ch = 0;
 
                 /* find last non-whitespace, non-comment node */
@@ -443,34 +434,34 @@ Node* JsTokenizeString(const char* string) {
                 /* see if we're "division" or "regexp" */
                 if (nodeIsIDENTIFIER(last) && nodeEquals(last, "return")) {
                     /* returning a regexp from a function */
-                    _JsExtractLiteral(&doc, node);
+                    _JsExtractLiteral(doc, node);
                 }
                 else if (ch && ((ch == ')') || (ch == '.') || (ch == ']') || (charIsIdentifier(ch)))) {
                     /* looks like an identifier; guess its division */
-                    _JsExtractSigil(&doc, node);
+                    _JsExtractSigil(doc, node);
                 }
                 else {
                     /* presume its a regexp */
-                    _JsExtractLiteral(&doc, node);
+                    _JsExtractLiteral(doc, node);
                 }
             }
         }
-        else if ((doc.buffer[doc.offset] == '"') || (doc.buffer[doc.offset] == '\'')  || (doc.buffer[doc.offset] == '`'))
-            _JsExtractLiteral(&doc, node);
-        else if (charIsWhitespace(doc.buffer[doc.offset]))
-            _JsExtractWhitespace(&doc, node);
-        else if (charIsIdentifier(doc.buffer[doc.offset]))
-            _JsExtractIdentifier(&doc, node);
+        else if ((doc->buffer[doc->offset] == '"') || (doc->buffer[doc->offset] == '\'')  || (doc->buffer[doc->offset] == '`'))
+            _JsExtractLiteral(doc, node);
+        else if (charIsWhitespace(doc->buffer[doc->offset]))
+            _JsExtractWhitespace(doc, node);
+        else if (charIsIdentifier(doc->buffer[doc->offset]))
+            _JsExtractIdentifier(doc, node);
         else
-            _JsExtractSigil(&doc, node);
+            _JsExtractSigil(doc, node);
 
         /* move ahead to the end of the parsed node */
-        doc.offset += node->length;
+        doc->offset += node->length;
 
         /* add the node to our list of nodes */
-        if (node != doc.tail)
-            JsAppendNode(doc.tail, node);
-        doc.tail = node;
+        if (node != doc->tail)
+            JsAppendNode(doc->tail, node);
+        doc->tail = node;
 
         /* some debugging info */
 #ifdef DEBUG
@@ -480,9 +471,9 @@ Node* JsTokenizeString(const char* string) {
             printf("%s: %s\n", strNodeTypes[node->type], node->contents);
             printf("next: '");
             for (idx=0; idx<=10; idx++) {
-                if ((doc.offset+idx) >= doc.length) break;
-                if (!doc.buffer[doc.offset+idx])    break;
-                printf("%c", doc.buffer[doc.offset+idx]);
+                if ((doc->offset+idx) >= doc->length) break;
+                if (!doc->buffer[doc->offset+idx])    break;
+                printf("%c", doc->buffer[doc->offset+idx]);
             }
             printf("'\n");
         }
@@ -490,7 +481,7 @@ Node* JsTokenizeString(const char* string) {
     }
 
     /* return the node list */
-    return doc.head;
+    return doc->head;
 }
 
 /* ****************************************************************************
@@ -687,8 +678,17 @@ Node* JsPruneNodes(Node *head) {
  */
 char* JsMinify(const char* string) {
     char* results;
+    JsDoc doc;
+
+    /* initialize our JS document object */
+    doc.head = NULL;
+    doc.tail = NULL;
+    doc.buffer = string;
+    doc.length = strlen(string);
+    doc.offset = 0;
+
     /* PASS 1: tokenize JS into a list of nodes */
-    Node* head = JsTokenizeString(string);
+    Node* head = JsTokenizeString(&doc, string);
     if (!head) return NULL;
     /* PASS 2: collapse nodes */
     JsCollapseNodes(head);
