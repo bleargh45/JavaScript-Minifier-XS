@@ -247,13 +247,20 @@ void JsClearNodeContents(Node* node) {
 
 /* sets the contents of a node */
 void JsSetNodeContents(Node* node, const char* string, size_t len) {
-    size_t bufSize = len + 1;
-    /* clear node, set new length */
-    JsClearNodeContents(node);
-    node->length = len;
-    /* allocate string, fill with NULLs, and copy */
-    Newz(0, node->contents, bufSize, char);
-    strncpy( node->contents, string, len );
+    /* if the buffer is already big enough, just overwrite it */
+    if (node->length >= len) {
+        memcpy( node->contents, string, len );
+        node->contents[len] = '\0';
+        node->length = len;
+    }
+    /* otherwise free the buffer, allocate a new one, and copy it in */
+    else {
+        JsClearNodeContents(node);
+        node->length = len;
+        /* allocate string, fill with NULLs, and copy */
+        Newz(0, node->contents, (len+1), char);
+        memcpy( node->contents, string, len );
+    }
 }
 
 /* removes the node from the list and discards it entirely */

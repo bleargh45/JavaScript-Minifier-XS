@@ -2,7 +2,8 @@ Revision history for Perl extension JavaScript::Minifier::XS.
 
 {{$NEXT}}
     - rewrote test suite into a single ".t" test
-    - optimized memory allocations, by allocating Nodes in bulk
+    - optimized memory allocations, by allocating Nodes in bulk, and being
+      smarter about when we need to free/reallocate content buffers in Nodes
 
 0.13      2020-12-30 21:46:29-08:00 America/Vancouver
     - POD cleanups; spelling, SYNOPSIS
