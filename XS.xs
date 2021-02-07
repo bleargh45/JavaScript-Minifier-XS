@@ -280,20 +280,11 @@ void JsAppendNode(Node* element, Node* node) {
     element->next = node;
 }
 
-/* collapses a node to a single whitespace character.  If the node contains any
- * endspace characters, that is what we're collapsed to.
- */
+/* collapses a node to a single whitespace character */
 void JsCollapseNodeToWhitespace(Node* node) {
     if (node->contents) {
-        char ws = node->contents[0];
-        size_t idx;
-        for (idx=0; idx<node->length; idx++) {
-            if (charIsEndspace(node->contents[idx])) {
-                ws = node->contents[idx];
-                break;
-            }
-        }
-        JsSetNodeContents(node, &ws, 1);
+        node->length = 1;
+        node->contents[1] = '\0';
     }
 }
 
