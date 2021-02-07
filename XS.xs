@@ -107,7 +107,22 @@ struct _Node {
     NodeType    type;
 };
 
+#define NODE_SET_SIZE 50000
+
+struct _NodeSet;
+typedef struct _NodeSet NodeSet;
+struct _NodeSet {
+    /* link to next NodeSet */
+    NodeSet*    next;
+    /* Nodes in this Set */
+    Node        nodes[NODE_SET_SIZE];
+    size_t      next_node;
+};
+
 typedef struct {
+    /* singly linked list of NodeSets */
+    NodeSet*    head_set;
+    NodeSet*    tail_set;
     /* linked list pointers */
     Node*       head;
     Node*       tail;
@@ -196,29 +211,30 @@ bool nodeEndsWith(Node* node, const char* string) {
  * ****************************************************************************
  */
 /* allocates a new node */
-Node* JsAllocNode() {
+Node* JsAllocNode(JsDoc* doc) {
     Node* node;
-    Newz(0, node, 1, Node);
+    NodeSet* set = doc->tail_set;
+
+    /* if our current NodeSet is full, allocate a new NodeSet */
+    if (set->next_node >= NODE_SET_SIZE) {
+        NodeSet* next_set;
+        Newz(0, next_set, 1, NodeSet);
+        set->next = next_set;
+        doc->tail_set = next_set;
+        set = next_set;
+    }
+
+    /* grab the next Node out of the NodeSet */
+    node = set->nodes + set->next_node;
+    set->next_node ++;
+
+    /* initialize the node */
     node->prev = NULL;
     node->next = NULL;
     node->contents = NULL;
     node->length = 0;
     node->type = NODE_EMPTY;
     return node;
-}
-
-/* frees the memory used by a node */
-void JsFreeNode(Node* node) {
-    if (node->contents)
-        Safefree(node->contents);
-    Safefree(node);
-}
-void JsFreeNodeList(Node* head) {
-    while (head) {
-        Node* tmp = head->next;
-        JsFreeNode(head);
-        head = tmp;
-    }
 }
 
 /* clears the contents of a node */
@@ -246,7 +262,6 @@ void JsDiscardNode(Node* node) {
         node->prev->next = node->next;
     if (node->next)
         node->next->prev = node->prev;
-    JsFreeNode(node);
 }
 
 /* appends the node to the given element */
@@ -406,7 +421,7 @@ Node* JsTokenizeString(JsDoc* doc, const char* string) {
     /* parse the JS */
     while ((doc->offset < doc->length) && (doc->buffer[doc->offset])) {
         /* allocate a new node */
-        Node* node = JsAllocNode();
+        Node* node = JsAllocNode(doc);
         if (!doc->head)
             doc->head = node;
         if (!doc->tail)
@@ -686,6 +701,8 @@ char* JsMinify(const char* string) {
     doc.buffer = string;
     doc.length = strlen(string);
     doc.offset = 0;
+    Newz(0, doc.head_set, 1, NodeSet);
+    doc.tail_set = doc.head_set;
 
     /* PASS 1: tokenize JS into a list of nodes */
     Node* head = JsTokenizeString(&doc, string);
@@ -713,8 +730,15 @@ char* JsMinify(const char* string) {
         }
         *ptr = 0;
     }
-    /* free memory used by node list */
-    JsFreeNodeList(head);
+    /* free memory used by the NodeSets */
+    {
+        NodeSet* curr = doc.head_set;
+        while (curr) {
+            NodeSet* next = curr->next;
+            Safefree(curr);
+            curr = next;
+        }
+    }
     /* return resulting minified JS back to caller */
     return results;
 }
