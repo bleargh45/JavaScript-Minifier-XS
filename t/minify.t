@@ -280,4 +280,36 @@ let html  = `
 };
 
 ###############################################################################
+# JS that minifies to "nothing"
+subtest 'minifies to nothing' => sub {
+  subtest 'block comment' => sub {
+    my $given  = '/* */';
+    my $expect = undef;
+    my $got    = minify($given);
+    is $got, $expect
+  };
+
+  subtest 'line comment' => sub {
+    my $given  = '// foo';
+    my $expect = undef;
+    my $got    = minify($given);
+    is $got, $expect
+  };
+
+  subtest 'just whitespace' => sub {
+    my $given  = "  \r\n \t ";
+    my $expect = undef;
+    my $got    = minify($given);
+    is $got, $expect
+  };
+
+  subtest 'empty string' => sub {
+    my $given  = '';
+    my $expect = undef;
+    my $got    = minify($given);
+    is $got, $expect
+  };
+};
+
+###############################################################################
 done_testing();
