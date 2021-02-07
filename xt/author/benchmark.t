@@ -1,7 +1,8 @@
 use strict;
 use warnings;
 use Test::More;
-use File::Slurp qw(slurp);
+use File::Basename qw(basename);
+use File::Slurp qw(write_file);
 use File::Which qw(which);
 use Benchmark qw(countit);
 use JavaScript::Minifier;
@@ -65,6 +66,11 @@ sub do_compress {
     # Compress the JS
     my $small;
     my $count = countit($time, sub { $small = $cb->($js) } );
+
+    # Stuff the compressed JS out to file for examination
+    my $fname = lc($name);
+    $fname =~ s{\W+}{-}g;
+    write_file("$fname.out", $small);
 
     # Calculate length, speed, and percent savings
     my $before   = length($js);
