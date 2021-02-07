@@ -14,21 +14,21 @@
  * CHARACTER CLASS METHODS
  * ****************************************************************************
  */
-int charIsSpace(char ch) {
+bool charIsSpace(char ch) {
     if (ch == ' ')  return 1;
     if (ch == '\t') return 1;
     return 0;
 }
-int charIsEndspace(char ch) {
+bool charIsEndspace(char ch) {
     if (ch == '\n') return 1;
     if (ch == '\r') return 1;
     if (ch == '\f') return 1;
     return 0;
 }
-int charIsWhitespace(char ch) {
+bool charIsWhitespace(char ch) {
     return charIsSpace(ch) || charIsEndspace(ch);
 }
-int charIsIdentifier(char ch) {
+bool charIsIdentifier(char ch) {
     if ((ch >= 'a') && (ch <= 'z')) return 1;
     if ((ch >= 'A') && (ch <= 'Z')) return 1;
     if ((ch >= '0') && (ch <= '9')) return 1;
@@ -38,7 +38,7 @@ int charIsIdentifier(char ch) {
     if (ch > 126)   return 1;
     return 0;
 }
-int charIsInfix(char ch) {
+bool charIsInfix(char ch) {
     /* EOL characters before+after these characters can be removed */
     if (ch == ',')  return 1;
     if (ch == ';')  return 1;
@@ -54,7 +54,7 @@ int charIsInfix(char ch) {
     if (ch == '\n') return 1;
     return 0;
 }
-int charIsPrefix(char ch) {
+bool charIsPrefix(char ch) {
     /* EOL characters after these characters can be removed */
     if (ch == '{')  return 1;
     if (ch == '(')  return 1;
@@ -62,7 +62,7 @@ int charIsPrefix(char ch) {
     if (ch == '!')  return 1;
     return charIsInfix(ch);
 }
-int charIsPostfix(char ch) {
+bool charIsPostfix(char ch) {
     /* EOL characters before these characters can be removed */
     if (ch == '}')  return 1;
     if (ch == ')')  return 1;
@@ -124,12 +124,12 @@ typedef struct {
  */
 
 /* checks to see if the node is the given string, case INSENSITIVELY */
-int nodeEquals(Node* node, const char* string) {
+bool nodeEquals(Node* node, const char* string) {
     return (strcasecmp(node->contents, string) == 0);
 }
 
 /* checks to see if the node contains the given string, case INSENSITIVELY */
-int nodeContains(Node* node, const char* string) {
+bool nodeContains(Node* node, const char* string) {
     const char* haystack = node->contents;
     size_t len = strlen(string);
     char ul_start[2] = { tolower(*string), toupper(*string) };
@@ -154,9 +154,10 @@ int nodeContains(Node* node, const char* string) {
     /* no match */
     return 0;
 }
+
 /* checks to see if the node begins with the given string, case INSENSITIVELY
  */
-int nodeBeginsWith(Node* node, const char* string) {
+bool nodeBeginsWith(Node* node, const char* string) {
     size_t len = strlen(string);
     if (len > node->length)
         return 0;
@@ -164,7 +165,7 @@ int nodeBeginsWith(Node* node, const char* string) {
 }
 
 /* checks to see if the node ends with the given string, case INSENSITIVELY */
-int nodeEndsWith(Node* node, const char* string) {
+bool nodeEndsWith(Node* node, const char* string) {
     size_t len = strlen(string);
     size_t off = node->length - len;
     if (len > node->length)
@@ -511,7 +512,7 @@ void JsCollapseNodes(Node* curr) {
                  * of their placement in the JS document.
                  */
                 if (!nodeIsIECONDITIONALBLOCKCOMMENT(curr)) {
-                    int convert_to_ws = 0;
+                    bool convert_to_ws = 0;
                     /* find surrounding non-WS nodes */
                     Node* nonws_prev = curr->prev;
                     Node* nonws_next = curr->next;
