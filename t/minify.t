@@ -237,6 +237,29 @@ subtest 'regexp escaped "/" is not a comment' => sub {
 };
 
 ###############################################################################
+# GH#6; regexps can contain an unescaped slash inside a character set
+subtest 'regexp with unescaped slash in character set' => sub {
+  my $given  = q|var a = ""; var re = /[/"]/i; console.log(re.test(a));|;
+  my $expect = q|var a="";var re=/[/"]/i;console.log(re.test(a));|;
+  my $got    = minify($given);
+  is $got, $expect;
+};
+
+subtest 'regexp with escaped slash in character set' => sub {
+  my $given  = q|var a = ""; var re = /[\/"]/i; console.log(re.test(a));|;
+  my $expect = q|var a="";var re=/[\/"]/i;console.log(re.test(a));|;
+  my $got    = minify($given);
+  is $got, $expect;
+};
+
+subtest 'regexp with not really a character set' => sub {
+  my $given  = q|var a = ""; var re = /\[/i; console.log(re.test(a));|;
+  my $expect = q|var a="";var re=/\[/i;console.log(re.test(a));|;
+  my $got    = minify($given);
+  is $got, $expect;
+};
+
+###############################################################################
 # should be able to return a regex from a function
 subtest 'return regex from function' => sub {
   my $given = q|

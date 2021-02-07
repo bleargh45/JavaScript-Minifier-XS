@@ -298,6 +298,7 @@ void _JsExtractLiteral(JsDoc* doc, Node* node) {
     const char* buf = doc->buffer;
     size_t offset   = doc->offset;
     char delimiter  = buf[offset];
+    bool in_char_class = 0;
     /* skip start of literal */
     offset ++;
     /* search for end of literal */
@@ -306,12 +307,24 @@ void _JsExtractLiteral(JsDoc* doc, Node* node) {
             /* escaped character; skip */
             offset ++;
         }
-        else if (buf[offset] == delimiter) {
-            const char* start = buf + doc->offset;
-            size_t length     = offset - doc->offset + 1;
-            JsSetNodeContents(node, start, length);
-            node->type = NODE_LITERAL;
-            return;
+        else {
+            /* if in a regex, track if we're in a character class */
+            if (delimiter == '/') {
+                if ((buf[offset] == '[') && !in_char_class) {
+                    in_char_class = 1;
+                }
+                if ((buf[offset] == ']') && in_char_class) {
+                    in_char_class = 0;
+                }
+            }
+            /* if we have found the end of the literal, store it */
+            if ((buf[offset] == delimiter) && !in_char_class) {
+                const char* start = buf + doc->offset;
+                size_t length     = offset - doc->offset + 1;
+                JsSetNodeContents(node, start, length);
+                node->type = NODE_LITERAL;
+                return;
+            }
         }
         /* move onto next character */
         offset ++;
