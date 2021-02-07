@@ -312,4 +312,15 @@ subtest 'minifies to nothing' => sub {
 };
 
 ###############################################################################
+# RT#58416; don't crash if attempting to minify something that isn't JS
+# ... while there's no guarantee that what we get back is _sane_, we should at
+#     least not blow up or segfault.
+subtest "Minifying non-JS shouldn't crash" => sub {
+  my $given  = 'not javascript';
+  my $expect = 'not javascript';
+  my $got    = minify($given);
+  is $got, $expect
+};
+
+###############################################################################
 done_testing();
