@@ -474,14 +474,14 @@ Node* JsTokenizeString(JsDoc* doc, const char* string) {
         {
             int idx;
             printf("----------------------------------------------------------------\n");
-            printf("%s: %s\n", strNodeTypes[node->type], node->contents);
-            printf("next: '");
+            printf("%s: [%s]\n", strNodeTypes[node->type], node->contents);
+            printf("next: [");
             for (idx=0; idx<=10; idx++) {
                 if ((doc->offset+idx) >= doc->length) break;
                 if (!doc->buffer[doc->offset+idx])    break;
                 printf("%c", doc->buffer[doc->offset+idx]);
             }
-            printf("'\n");
+            printf("]\n");
         }
 #endif
     }
