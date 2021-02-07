@@ -599,7 +599,7 @@ int JsCanPrune(Node* node) {
             if (nodeIsPREFIXSIGIL(node) && next && nodeIsWHITESPACE(next))
                 return PRUNE_NEXT;
             /* remove whitespace before "postfix" sigils */
-            if (nodeIsPOSTFIXSIGIL(node) && prev && nodeIsWHITESPACE(prev))
+            if (nodeIsPOSTFIXSIGIL(node) && prev && nodeIsWHITESPACE(prev) && prev->prev && !nodeIsLINECOMMENT(prev->prev))
                 return PRUNE_PREVIOUS;
             /* remove whitespace (but NOT endspace) after closing brackets */
             if (next && nodeIsWHITESPACE(next) && !nodeIsENDSPACE(next) && (nodeIsCHAR(node,')') || nodeIsCHAR(node,'}') || nodeIsCHAR(node,']')))

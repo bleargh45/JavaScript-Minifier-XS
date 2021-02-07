@@ -51,6 +51,17 @@ subtest 'comments' => sub {;
     is $got, $expect;
   };
 
+  subtest 'preserved copyright line comment gets EOL' => sub { # GH#3
+    my $given = q|
+      function foo() {
+        // copyright is preserved
+      }
+    |;
+    my $expect = qq|function foo(){// copyright is preserved\n}|;
+    my $got    = minify($given);
+    is $got, $expect;
+  };
+
   subtest 'inline block comment' => sub {
     my $given  = 'var foo /* remove */ = /* me too */ 3;';
     my $expect = 'var foo=3;';

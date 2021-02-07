@@ -5,6 +5,8 @@ Revision history for Perl extension JavaScript::Minifier::XS.
     - optimized memory allocations, by allocating Nodes in bulk, and being
       smarter about when we need to free/reallocate content buffers in Nodes
     - optimize whitespace collapsing
+    - GH#3 / RT#108682; fix whitespace reduction at end of preserved line
+      comment.  Thanks to Dan Goodliffe
 
 0.13      2020-12-30 21:46:29-08:00 America/Vancouver
     - POD cleanups; spelling, SYNOPSIS
