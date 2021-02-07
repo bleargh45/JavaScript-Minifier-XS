@@ -297,26 +297,6 @@ void JsCollapseNodeToWhitespace(Node* node) {
     }
 }
 
-/* collapses a node to a single endspace character.  If the node doesn't
- * contain any endspace characters, the node is collapsed to an empty string.
- */
-void JsCollapseNodeToEndspace(Node* node) {
-    if (node->contents) {
-        char ws = 0;
-        size_t idx;
-        for (idx=0; idx<node->length; idx++) {
-            if (charIsEndspace(node->contents[idx])) {
-                ws = node->contents[idx];
-                break;
-            }
-        }
-        JsClearNodeContents(node);
-        if (ws)
-            JsSetNodeContents(node, &ws, 1);
-    }
-}
-
-
 /* ****************************************************************************
  * TOKENIZING FUNCTIONS
  * ****************************************************************************
