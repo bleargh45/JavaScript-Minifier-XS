@@ -282,7 +282,7 @@ void JsAppendNode(Node* element, Node* node) {
 
 /* collapses a node to a single whitespace character */
 void JsCollapseNodeToWhitespace(Node* node) {
-    if (node->contents) {
+    if (node->contents && (node->length > 1)) {
         node->length = 1;
         node->contents[1] = '\0';
     }
