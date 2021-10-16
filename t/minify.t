@@ -16,7 +16,7 @@ subtest 'leading whitespace can be removed' => sub {
 ###############################################################################
 subtest 'trailing whitespace can be removed' => sub {
   my $given  = qq{var trailing="trailing whitespace gets removed";  \t\n\r  \n};
-  my $expect =qq{var trailing="trailing whitespace gets removed";};
+  my $expect = qq{var trailing="trailing whitespace gets removed";};
   my $got    = minify($given);
   is $got, $expect;
 };
