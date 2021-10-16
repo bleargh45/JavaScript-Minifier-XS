@@ -1,6 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
 {{$NEXT}}
+
+0.15      2021-10-15 20:21:23-07:00 America/Vancouver
     - GH#8 - preserve newlines when collapsing whitespace; if a block of
       whitespace contains a newline, then when collapsing we collapse to a
       newline character, not just "the first whitespace char we found"
