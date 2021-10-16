@@ -22,6 +22,14 @@ subtest 'trailing whitespace can be removed' => sub {
 };
 
 ###############################################################################
+subtest 'whitespace collapsing preserves newlines' => sub {
+  my $given  = qq{var a=3   \n\rvar a=5};
+  my $expect = qq{var a=3\nvar a=5};
+  my $got    = minify($given);
+  is $got, $expect;
+};
+
+###############################################################################
 subtest 'comments' => sub {;
   subtest 'block comments' => sub {
     my $given  = ";/* block comments get removed */;";
