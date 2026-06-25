@@ -487,7 +487,7 @@ Node* JsTokenizeString(JsDoc* doc, const char* string) {
         /* some debugging info */
 #ifdef DEBUG
         {
-            int idx;
+            size_t idx;
             printf("----------------------------------------------------------------\n");
             printf("%s: [%s]\n", strNodeTypes[node->type], node->contents);
             printf("next: [");
