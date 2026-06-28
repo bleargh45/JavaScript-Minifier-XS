@@ -446,13 +446,14 @@ Node* JsTokenizeString(JsDoc* doc, const char* string) {
                 char ch = 0;
 
                 /* find last non-whitespace, non-comment node */
-                while (nodeIsWHITESPACE(last) || nodeIsCOMMENT(last))
+                while (last && (nodeIsWHITESPACE(last) || nodeIsCOMMENT(last)))
                     last = last->prev;
 
-                ch = last->contents[last->length-1];
+                if (last && (last->length > 0))
+                    ch = last->contents[last->length-1];
 
                 /* see if we're "division" or "regexp" */
-                if (nodeIsIDENTIFIER(last) && nodeEquals(last, "return")) {
+                if (last && nodeIsIDENTIFIER(last) && nodeEquals(last, "return")) {
                     /* returning a regexp from a function */
                     _JsExtractLiteral(doc, node);
                 }
