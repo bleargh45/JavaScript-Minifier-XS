@@ -6,5 +6,6 @@ author_requires 'File::Slurp';
 author_requires 'File::Which';
 author_requires 'IPC::Run';
 author_requires 'JavaScript::Minifier';
+author_requires 'Linux::Smaps';
 author_requires 'Number::Format';
 author_requires 'Test::LeakTrace';
