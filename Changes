@@ -1,6 +1,8 @@
 Revision history for Perl extension JavaScript::Minifier::XS.
 
 {{$NEXT}}
+
+0.16      2026-06-28 14:10:28-07:00 America/Vancouver
     - Fixes CVE-2026-56017, which caused Perl to SEGFAULT when calling
       minify().  Thanks to CPANSec for raising the issue, and providing a
       prototype fix.
